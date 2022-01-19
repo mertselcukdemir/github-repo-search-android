@@ -5,6 +5,7 @@
 
 import dependencies.Dependencies
 
+
 plugins {
     id("commons.android-library")
 }
@@ -18,16 +19,20 @@ android {
     buildFeatures {
         dataBinding = true
     }
+
+    buildTypes.forEach{
+        it.buildConfigField("String", "SERVER_URL", "\"https://api.github.com/search/\"")
+    }
 }
 
 dependencies {
-    implementation(project(BuildModules.Commons.UI))
-
-    implementation(Dependencies.CONSTRAINT_LAYOUT)
-    implementation(Dependencies.NAVIGATION_FRAGMENT)
     implementation(Dependencies.NAVIGATION_UI)
+    implementation(Dependencies.LIFECYCLE_EXTENSIONS)
     implementation(Dependencies.FRAGMENT_KTX)
-}
-repositories {
-    mavenCentral()
+    implementation(Dependencies.CORE_KTX)
+    implementation(Dependencies.RETROFIT)
+    implementation(Dependencies.RETROFIT_CONVERTER)
+    implementation(Dependencies.LOGGING)
+    implementation(Dependencies.MOSHI)
+    implementation(Dependencies.MOSHI_KTX)
 }
