@@ -8,5 +8,5 @@ import BuildDependenciesVersions
  */
 
 object AnnotationProcessorsDependencies {
-    const val HILT = "com.google.dagger:hilt-android-compiler:${BuildDependenciesVersions.HILT}"
+    const val DAGGER = "com.google.dagger:dagger-compiler:${BuildDependenciesVersions.DAGGER}"
 }

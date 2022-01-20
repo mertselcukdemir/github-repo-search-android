@@ -5,7 +5,6 @@ plugins {
     id(BuildPlugins.ANDROID_APPLICATION)
     id(BuildPlugins.KOTLIN_ANDROID)
     id(BuildPlugins.KOTLIN_KAPT)
-    id(BuildPlugins.HILT)
 }
 
 android {
@@ -70,9 +69,9 @@ dependencies {
     implementation(Dependencies.NAVIGATION_FRAGMENT)
     implementation(Dependencies.TIMBER)
     implementation(Dependencies.LOGGING)
-    implementation(Dependencies.HILT)
+    implementation(Dependencies.DAGGER)
     implementation(Dependencies.PLAY_CORE)
-    kapt(AnnotationProcessorsDependencies.HILT)
+    kapt(AnnotationProcessorsDependencies.DAGGER)
 
 
 }

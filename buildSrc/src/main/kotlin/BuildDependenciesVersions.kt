@@ -17,7 +17,7 @@ object BuildDependenciesVersions {
     const val LIFECYCLE = "2.2.0"
     const val CORE_KTX = "1.7.0"
     const val FRAGMENT_KTX = "1.4.0"
-    const val HILT = "2.40.5"
+    const val DAGGER = "2.40.5"
     const val CONSTRAINT_LAYOUT = "2.1.2"
     const val TIMBER = "5.0.1"
     const val RETROFIT = "2.9.0"

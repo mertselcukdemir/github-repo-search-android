@@ -1,12 +1,9 @@
 package com.mertselcukdemir.githubrepo.di
 
-import android.app.Application
 import android.content.Context
 import com.mertselcukdemir.githubrepo.GithubRepoApplication
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 /**
@@ -20,7 +17,6 @@ import javax.inject.Singleton
  * @see Module
  */
 @Module
-@InstallIn(SingletonComponent::class)
 object AppModule {
 
     /**

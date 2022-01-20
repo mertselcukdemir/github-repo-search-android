@@ -24,7 +24,7 @@ object Dependencies {
         const val CORE_KTX = "androidx.core:core-ktx:${BuildDependenciesVersions.CORE_KTX}"
         const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${BuildDependenciesVersions.FRAGMENT_KTX}"
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:${BuildDependenciesVersions.CONSTRAINT_LAYOUT}"
-        const val HILT = "com.google.dagger:hilt-android:${BuildDependenciesVersions.HILT}"
+        const val DAGGER = "com.google.dagger:dagger:${BuildDependenciesVersions.DAGGER}"
         const val TIMBER = "com.jakewharton.timber:timber:${BuildDependenciesVersions.TIMBER}"
         const val RETROFIT = "com.squareup.retrofit2:retrofit:${BuildDependenciesVersions.RETROFIT}"
         const val RETROFIT_CONVERTER = "com.squareup.retrofit2:converter-moshi:${BuildDependenciesVersions.RETROFIT}"

@@ -5,8 +5,6 @@
 
 package commons
 
-import BuildAndroidConfig
-import BuildProductDimensions
 import dependencies.Dependencies
 import dependencies.AnnotationProcessorsDependencies
 
@@ -14,16 +12,15 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 dependencies {
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.COROUTINES)
     implementation(Dependencies.COROUTINES_ANDROID)
-    implementation(Dependencies.HILT)
+    implementation(Dependencies.DAGGER)
     implementation(Dependencies.TIMBER)
 
 
-    kapt(AnnotationProcessorsDependencies.HILT)
+    kapt(AnnotationProcessorsDependencies.DAGGER)
 }
