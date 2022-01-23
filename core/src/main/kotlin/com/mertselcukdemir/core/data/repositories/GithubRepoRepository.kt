@@ -14,6 +14,8 @@ private const val SORT_VAL = "stars"
 private const val ORDER_KEY = "order"
 private const val ORDER_VAL = "desc"
 private const val KEYWORD_KEY = "q"
+private const val PER_PAGE_KEY = "per_page"
+private const val PER_PAGE_VAL = 10
 
 /**
  * Repository module for handling Github API network operations [GithubRepoService].
@@ -32,9 +34,10 @@ class GithubRepoRepository(private val service: GithubRepoService) {
 
     fun getQueries(): HashMap<String, String?> {
         return hashMapOf(
-            SORT_KEY to SORT_KEY,
+            SORT_KEY to SORT_VAL,
             ORDER_KEY to ORDER_VAL,
-            KEYWORD_KEY to keyword
+            KEYWORD_KEY to keyword,
+            PER_PAGE_KEY to PER_PAGE_VAL.toString()
         )
     }
 

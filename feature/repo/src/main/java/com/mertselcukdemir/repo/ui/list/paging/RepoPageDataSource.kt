@@ -2,12 +2,15 @@ package com.mertselcukdemir.repo.ui.list.paging
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
+import com.mertselcukdemir.core.data.ErrorData
 import com.mertselcukdemir.core.data.RepositoryModel
 import com.mertselcukdemir.core.data.repositories.GithubRepoRepository
 import com.mertselcukdemir.core.network.NetworkState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.HashMap
@@ -19,14 +22,14 @@ import kotlin.collections.HashMap
 
 private const val STARTING_PAGE_INDEX = 1
 private const val PAGE_KEY = "page"
-const val PAGE_MAX_ELEMENTS = 30
+const val PAGE_MAX_ELEMENTS = 10
 const val SEARCH_TYPE = "repositories"
 
 /**
  * Incremental data loader for page-keyed content, where requests return keys for next/previous
  * pages. Obtaining paginated the trending repositories.
  *
- * @see PagingSource
+ * @see PageKeyedDataSource
  */
 
 class RepoPageDataSource @Inject constructor(
@@ -52,7 +55,12 @@ class RepoPageDataSource @Inject constructor(
                 retry = {
                     loadInitial(params, callback)
                 }
-                networkState.postValue(NetworkState.Error())
+                networkState.postValue(
+                    NetworkState.Error(
+                        false,
+                        ErrorData(errorCode = null, errorMessage = throwable.message)
+                    )
+                )
             }
         ) {
             queries = repository.getQueries()
@@ -61,18 +69,28 @@ class RepoPageDataSource @Inject constructor(
                 type = SEARCH_TYPE,
                 queries = queries
             )
-            if (response.isSuccessful) {
-                val items = response.body()?.items
-                if (items.isNullOrEmpty().not()) {
-                    callback.onResult(items!!, null, PAGE_MAX_ELEMENTS)
-                    networkState.postValue(NetworkState.Success(isEmptyResponse = items.isEmpty()))
+            when (response.code()) {
+                200 -> {
+                    val items = response.body()?.items
+                    if (items.isNullOrEmpty().not()) {
+                        callback.onResult(items!!, null, PAGE_MAX_ELEMENTS)
+                        networkState.postValue(NetworkState.Success(isEmptyResponse = items.isEmpty()))
+                    }
+                }
+                else -> {
+                    networkState.postValue(
+                        NetworkState.Error(
+                            true,
+                            ErrorData(response.code(), (response.errorBody() as ResponseBody).string())
+                        )
+                    )
                 }
             }
         }
     }
 
     /**
-     * Append page with the key specified by [LoadParams.key].
+     * Append page with the key specified by [PageKeyedDataSource.LoadParams.key].
      *
      * @param params Parameters for the load, including the key for the new page, and requested
      * load size.
@@ -82,23 +100,39 @@ class RepoPageDataSource @Inject constructor(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, RepositoryModel>) {
         networkState.postValue(NetworkState.Loading(true))
         scope.launch(
-            CoroutineExceptionHandler { _, _ ->
+            CoroutineExceptionHandler { _, throwable ->
                 retry = {
                     loadAfter(params, callback)
                 }
-                networkState.postValue(NetworkState.Error(true))
+                networkState.postValue(
+                    NetworkState.Error(
+                        false,
+                        ErrorData(errorCode = null, errorMessage = throwable.message)
+                    )
+                )
             }
         ) {
-            queries[PAGE_KEY] = params.key.toString()
+            delay(500)
+            queries[PAGE_KEY] = ((params.key / 10) + 1).toString()
             val response = repository.getRepoList(
                 type = SEARCH_TYPE,
                 queries = queries
             )
-            if (response.isSuccessful) {
-                val items = response.body()?.items
-                if (items.isNullOrEmpty().not()) {
-                    callback.onResult(items!!, params.key + PAGE_MAX_ELEMENTS)
-                    networkState.postValue(NetworkState.Success(true, items.isEmpty()))
+            when (response.code()) {
+                200 -> {
+                    val items = response.body()?.items
+                    if (items.isNullOrEmpty().not()) {
+                        callback.onResult(items!!, params.key + PAGE_MAX_ELEMENTS)
+                        networkState.postValue(NetworkState.Success(true, items.isEmpty()))
+                    }
+                }
+                else -> {
+                    networkState.postValue(
+                        NetworkState.Error(
+                            true,
+                            ErrorData(response.code(), (response.errorBody() as ResponseBody).string())
+                        )
+                    )
                 }
             }
         }

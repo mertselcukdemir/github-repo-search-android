@@ -1,5 +1,7 @@
 package com.mertselcukdemir.core.network
 
+import com.mertselcukdemir.core.data.ErrorData
+
 /**
  * Created by mertselcukdemir on 20.01.2022
  * All rights reserved.
@@ -34,9 +36,11 @@ sealed class NetworkState {
      * Error network state.
      *
      * @param isAdditional Is additional request.
+     * @param data is a holder class for error code & message.
      */
     data class Error(
-        val isAdditional: Boolean = false
+        val isAdditional: Boolean = false,
+        val errorData: ErrorData? = null
     ) : NetworkState()
 
     // ============================================================================================

@@ -3,9 +3,12 @@ package com.mertselcukdemir.repo.ui.list
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
+import com.mertselcukdemir.core.data.ErrorData
 import com.mertselcukdemir.core.network.NetworkState
 import com.mertselcukdemir.repo.ui.list.paging.PAGE_MAX_ELEMENTS
 import com.mertselcukdemir.repo.ui.list.paging.RepoPageDataSourceFactory
+import com.mertselcukdemir.ui.base.BaseViewModel
+import com.mertselcukdemir.ui.livedata.SingleLiveData
 import javax.inject.Inject
 
 /**
@@ -19,9 +22,9 @@ import javax.inject.Inject
  * @see ViewModel
  */
 class RepoListViewModel @Inject constructor(
-    val dataSourceFactory: RepoPageDataSourceFactory
-) : ViewModel() {
-    val networkState = Transformations.switchMap(dataSourceFactory.sourceLiveData) {
+    private val dataSourceFactory: RepoPageDataSourceFactory
+) : BaseViewModel() {
+    private val networkState = Transformations.switchMap(dataSourceFactory.sourceLiveData) {
         it.networkState
     }
     val data = LivePagedListBuilder(dataSourceFactory, PAGE_MAX_ELEMENTS).build()
@@ -43,8 +46,10 @@ class RepoListViewModel @Inject constructor(
                 }
             is NetworkState.Error ->
                 if (it.isAdditional) {
+                    handleError(it.errorData)
                     RepoListViewState.AddError
                 } else {
+                    handleError(it.errorData)
                     RepoListViewState.Error
                 }
         }
@@ -54,7 +59,10 @@ class RepoListViewModel @Inject constructor(
         dataSourceFactory.search(keyword)
     }
 
-    fun clear() {
-        data.value?.clear()
+    /**
+     * Retry last fetch operation to add repos into list.
+     */
+    fun retryAddReposList() {
+        dataSourceFactory.retry()
     }
 }

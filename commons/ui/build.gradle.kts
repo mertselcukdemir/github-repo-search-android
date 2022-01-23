@@ -31,7 +31,8 @@ dependencies {
     implementation(Dependencies.NAVIGATION_FRAGMENT)
     implementation(Dependencies.NAVIGATION_UI)
     implementation(Dependencies.COIL)
-    //kapt(AnnotationProcessorsDependencies.GLIDE)
+    implementation(Dependencies.PAGING)
+    implementation(project(BuildModules.CORE))
 }
 repositories {
     mavenCentral()
