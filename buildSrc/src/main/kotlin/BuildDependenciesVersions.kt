@@ -25,4 +25,5 @@ object BuildDependenciesVersions {
     const val MOSHI = "1.13.0"
     const val COIL = "1.4.0"
     const val PLAY_CORE = "1.8.2"
+    const val PAGING = "2.1.2"
 }

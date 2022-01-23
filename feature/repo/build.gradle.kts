@@ -4,6 +4,7 @@
  */
 
 import dependencies.Dependencies
+import dependencies.implementation
 
 plugins {
     id("commons.android-dynamic-feature")
@@ -23,8 +24,9 @@ android {
 dependencies {
     implementation(project(BuildModules.Commons.VIEW))
     implementation(project(BuildModules.Commons.UI))
-
     implementation(Dependencies.RECYCLER_VIEW)
     implementation(Dependencies.CARD_VIEW)
+    implementation(Dependencies.PAGING)
+
     implementation(Dependencies.RETROFIT)
 }
