@@ -34,9 +34,6 @@ data class RepositoryModel(
 	@Json(name="name")
 	val name: String? = null,
 
-	@Json(name="full_name")
-	val full_name: String? = null,
-
 	@Json(name="default_branch")
 	val defaultBranch: String? = null,
 
