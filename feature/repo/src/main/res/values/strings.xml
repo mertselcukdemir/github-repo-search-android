@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Repo list-->
+    <string name="repo_list_empty_text">Empty Repo list</string>
+    <string name="repo_list_error_text">Ups… an error occurred on obtain repo list, please swipe down to try again</string>
+    <string name="repo_list_add_error_text">Error on fetch more repo</string>
+    <string name="repo_list_add_retry_button">Retry</string>
+</resources>
