@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.View
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.mertselcukdemir.core.data.RepositoryModel
 import com.mertselcukdemir.githubrepo.GithubRepoApplication.Companion.coreComponent
 import com.mertselcukdemir.repo.R
 import com.mertselcukdemir.repo.databinding.FragmentRepoListBinding
 import com.mertselcukdemir.repo.ui.list.adapter.RepoListAdapter
-import com.mertselcukdemir.repo.ui.list.adapter.RepoListAdapterState
 import com.mertselcukdemir.repo.ui.list.di.DaggerRepoListComponent
 import com.mertselcukdemir.repo.ui.list.di.RepoListModule
 import com.mertselcukdemir.ui.base.BaseFragment
 import com.mertselcukdemir.ui.extensions.observe
 import com.mertselcukdemir.ui.utils.DebouncingQueryTextListener
+
+import androidx.fragment.app.Fragment
 
 /**
  * Created by mertselcukdemir on 20.01.2022
@@ -44,6 +44,10 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
         observe(viewModel.state, ::onViewStateChange)
         observe(viewModel.data, ::onViewDataChange)
         observe(viewModel.errorMessage, ::onErrorInitialized)
+        observe(viewModel.keyword, ::onKeywordChanged)
+        if (savedInstanceState != null) {
+            viewModel.restoreFromBundle(savedInstanceState)
+        }
     }
 
     override fun onInitDependencyInjection() {
@@ -102,7 +106,7 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
             ) { newText ->
                 newText?.let {
                     if (newText.length >= 3) {
-                        viewModel.search(newText)
+                        viewModel.keyword.value = newText
                     }
                 }
             }
@@ -140,7 +144,25 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
         }
     }
 
+    private fun onKeywordChanged(keyword: String) {
+        viewModel.search(keyword)
+    }
+
+    /**
+     * @param errorMessage is the text to show error.
+     */
     private fun onErrorInitialized(errorMessage: String) {
         Snackbar.make(viewBinding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
+    }
+
+    /**
+     *Called to ask the fragment to save its current dynamic state,
+     * so it can later be reconstructed in a new instance if its process is restarted
+     *
+     * @see Fragment.onSaveInstanceState
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        viewModel.saveToBundle(outState)
     }
 }
