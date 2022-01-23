@@ -74,8 +74,9 @@ class RepoPageDataSource @Inject constructor(
                     val items = response.body()?.items
                     if (items.isNullOrEmpty().not()) {
                         callback.onResult(items!!, null, PAGE_MAX_ELEMENTS)
-                        networkState.postValue(NetworkState.Success(isEmptyResponse = items.isEmpty()))
+                        networkState.postValue(NetworkState.Success(isEmptyResponse = false))
                     }
+                    else networkState.postValue(NetworkState.Success(isEmptyResponse = true))
                 }
                 else -> {
                     networkState.postValue(

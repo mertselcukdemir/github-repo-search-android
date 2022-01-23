@@ -11,6 +11,7 @@ import com.mertselcukdemir.githubrepo.GithubRepoApplication.Companion.coreCompon
 import com.mertselcukdemir.repo.R
 import com.mertselcukdemir.repo.databinding.FragmentRepoListBinding
 import com.mertselcukdemir.repo.ui.list.adapter.RepoListAdapter
+import com.mertselcukdemir.repo.ui.list.adapter.RepoListAdapterState
 import com.mertselcukdemir.repo.ui.list.di.DaggerRepoListComponent
 import com.mertselcukdemir.repo.ui.list.di.RepoListModule
 import com.mertselcukdemir.ui.base.BaseFragment
@@ -108,7 +109,6 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
         )
     }
 
-
     /**
      * Observer view data change on [RepoListViewModel].
      *
@@ -124,26 +124,20 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
         }
     }
 
-
     /**
      * Observer view state change on [RepoListViewModel].
      *
-     * @param viewState State of repo list.
+     * Ignored for this demonstration. But mostly useful for analytics events
+     * @param viewState State of repos list.
      */
-    private fun onViewStateChange(viewState: RepoListViewState) {/*
+    private fun onViewStateChange(viewState: RepoListViewState) {
         when (viewState) {
-            is RepoListViewState.Loaded ->
-                viewAdapter?.submitState(RepoListAdapterState.Added)
-            is RepoListViewState.AddLoading ->
-                viewAdapter?.submitState(RepoListAdapterState.AddLoading)
-            is RepoListViewState.AddError ->
-                viewAdapter?.submitState(RepoListAdapterState.AddError)
-            is RepoListViewState.NoMoreElements ->
-                viewAdapter?.submitState(RepoListAdapterState.NoMore)
-            else -> { //Ignore
-            }
+            is RepoListViewState.Loaded -> {}
+            is RepoListViewState.AddLoading -> {}
+            is RepoListViewState.AddError -> {}
+            is RepoListViewState.NoMoreElements -> {}
+            else -> {}
         }
-    */
     }
 
     private fun onErrorInitialized(errorMessage: String) {

@@ -2,6 +2,7 @@ package com.mertselcukdemir.repo.ui.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mertselcukdemir.core.data.RepositoryModel
@@ -10,25 +11,11 @@ import com.mertselcukdemir.repo.ui.list.adapter.holders.LoadingViewHolder
 import com.mertselcukdemir.repo.ui.list.adapter.holders.RepoListViewHolder
 import com.mertselcukdemir.ui.base.BaseListAdapter
 import com.mertselcukdemir.ui.base.BasePagedListAdapter
-import javax.inject.Inject
 
 /**
  * Created by mertselcukdemir on 21.01.2022
  * All rights reserved.
  */
-
-/**
- * Enum class containing the different type of cell view, with the configuration.
- */
-internal enum class ItemView(val type: Int, val span: Int) {
-    REPO(type = 0, span = 1),
-    LOADING(type = 1, span = 2),
-    ERROR(type = 2, span = 2);
-
-    companion object {
-        fun valueOf(type: Int): ItemView? = values().first { it.type == type }
-    }
-}
 
 /**
  * Class for presenting repos List data in a [RecyclerView], including computing
@@ -44,7 +31,7 @@ class RepoListAdapter(
     contentsSame = { old, new -> old == new }
 ) {
 
-    //private var state: RepoListAdapterState = RepoListAdapterState.Added
+    private var state: RepoListAdapterState = RepoListAdapterState.Added
 
     /**
      * Called when RecyclerView needs a new [RecyclerView.ViewHolder] of the given type to
@@ -63,11 +50,6 @@ class RepoListAdapter(
         viewType: Int
     ): RecyclerView.ViewHolder {
         return RepoListViewHolder(inflater)
-        /*return when (ItemView.valueOf(viewType)) {
-            ItemView.REPO -> RepoListViewHolder(inflater)
-            ItemView.LOADING -> LoadingViewHolder(inflater)
-            else -> ErrorViewHolder(inflater)
-        }*/
     }
 
     /**
@@ -84,83 +66,5 @@ class RepoListAdapter(
                 holder.bind(it, repoCallBack)
             }
         }
-        /*when (getItemView(position)) {
-            ItemView.REPO ->
-                getItem(position)?.let {
-                    if (holder is RepoListViewHolder) {
-                        holder.bind(it, repoCallBack)
-                    }
-                }
-            ItemView.ERROR ->
-                if (holder is ErrorViewHolder) {
-                    holder.bind(retryCallBack)
-                }
-            else -> {
-            }
-        }*/
     }
-
-    /**
-     * Returns the total number of items in the data set held by the adapter.
-     *
-     * @return The total number of items in this adapter.
-     * @see BasePagedListAdapter.getItemCount
-     */
-    /*override fun getItemCount() =
-        if (state.hasExtraRow) {
-            super.getItemCount() + 1
-        } else {
-            super.getItemCount()
-        }*/
-
-    /**
-     * Return the view type of the item at position for the purposes of view recycling.
-     *
-     * @param position Position to query.
-     * @return Integer value identifying the type of the view needed to represent at position.
-     * @see BasePagedListAdapter.getItemViewType
-     */
-    //override fun getItemViewType(position: Int) = getItemView(position).type
-
-    /**
-     * Update current adapter state with the new one, applying visual changes.
-     *
-     * @param newState State of list adapter to update.
-     */
-    /*fun submitState(newState: RepoListAdapterState) {
-        val oldState = state
-        state = newState
-        if (newState.hasExtraRow && oldState != newState) {
-            notifyItemChanged(itemCount - 1)
-        }
-    }
-*/
-    /**
-     * Obtain helper class to provide the number of spans each item occupies.
-     *
-     * @return The helper class.
-     */
-    /*fun getSpanSizeLookup(): GridLayoutManager.SpanSizeLookup =
-        object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return getItemView(position).span
-            }
-        }*/
-
-    /**
-     * Obtain the type of view by the item position.
-     *
-     * @param position Current item position.
-     * @return ItemView type.
-     */
-    /*internal fun getItemView(position: Int) =
-        if (state.hasExtraRow && position == itemCount - 1) {
-            if (state.isAddError()) {
-                ItemView.ERROR
-            } else {
-                ItemView.LOADING
-            }
-        } else {
-            ItemView.REPO
-        }*/
 }

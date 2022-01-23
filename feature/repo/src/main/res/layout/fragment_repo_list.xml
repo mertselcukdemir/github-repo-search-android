@@ -53,15 +53,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            tools:listitem="@layout/adapter_repo"
-            android:paddingBottom="60dp"
             android:paddingHorizontal="5dp"
-            tools:spanCount="2"
-            tools:itemCount="12"
-            tools:orientation="vertical"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:paddingBottom="60dp"
+            app:goneUnless="@{!viewModel.loading || !viewModel.isEmptyResponse()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/search_toolbar"
+            tools:itemCount="12"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/adapter_repo"
+            tools:orientation="vertical"
+            tools:spanCount="2" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/accent"
+            app:goneUnless="@{viewModel.loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/trivia_tab_empty_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:fontFamily="@font/nunito_black"
+            android:gravity="center"
+            android:text="@string/lbl_empty_result"
+            android:textColor="@color/accent"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            app:goneUnless="@{viewModel.isEmptyResponse()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

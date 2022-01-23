@@ -1,5 +1,6 @@
 package com.mertselcukdemir.ui.bindings
 
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import coil.load
@@ -17,4 +18,10 @@ import coil.load
 @BindingAdapter("imageUrl")
 fun ImageView.imageUrl(url: String?) {
     load(url)
+}
+
+
+@BindingAdapter("goneUnless")
+fun goneUnless(view: View, visible: Boolean) {
+    view.visibility = if (visible) View.VISIBLE else View.GONE
 }

@@ -1,5 +1,6 @@
 package com.mertselcukdemir.repo.ui.list
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
@@ -28,23 +29,35 @@ class RepoListViewModel @Inject constructor(
         it.networkState
     }
     val data = LivePagedListBuilder(dataSourceFactory, PAGE_MAX_ELEMENTS).build()
+    val loading: MutableLiveData<Boolean> = MutableLiveData()
+    val isEmptyResponse: MutableLiveData<Boolean> = MutableLiveData(false)
     val state = Transformations.map(networkState) {
         when (it) {
-            is NetworkState.Success ->
+            is NetworkState.Success -> {
+                loading.value = false
                 if (it.isAdditional && it.isEmptyResponse) {
                     RepoListViewState.NoMoreElements
                 } else if (it.isEmptyResponse) {
+                    isEmptyResponse.value = true
                     RepoListViewState.Empty
                 } else {
                     RepoListViewState.Loaded
                 }
-            is NetworkState.Loading ->
+            }
+
+            is NetworkState.Loading -> {
+                isEmptyResponse.value = false
                 if (it.isAdditional) {
                     RepoListViewState.AddLoading
                 } else {
+                    loading.value = true
                     RepoListViewState.Loading
                 }
-            is NetworkState.Error ->
+            }
+
+            is NetworkState.Error -> {
+                loading.value = false
+                isEmptyResponse.value = false
                 if (it.isAdditional) {
                     handleError(it.errorData)
                     RepoListViewState.AddError
@@ -52,6 +65,7 @@ class RepoListViewModel @Inject constructor(
                     handleError(it.errorData)
                     RepoListViewState.Error
                 }
+            }
         }
     }
 

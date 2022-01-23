@@ -5,6 +5,7 @@
     <color name="primaryDark">#0f0f0f</color>
     <color name="primaryLight">#121212</color>
     <color name="accent">#f1f1f1</color>
+    <color name="accent_transparent">#B3F1F1F1</color>
 
     <!--Text colors-->
     <color name="textHeadline">#f1f1f1</color>
