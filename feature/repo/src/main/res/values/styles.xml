@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SearchAutoCompleteTextView">
+        <item name="android:textColor">@color/textBody</item>
+        <item name="android:textColorHint">@color/accent_transparent</item>
+        <item name="android:colorControlActivated">@color/textBody</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+</resources>

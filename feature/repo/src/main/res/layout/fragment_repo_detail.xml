@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.mertselcukdemir.repo.ui.detail.RepoDetailViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.mertselcukdemir.repo.ui.detail.RepoDetailFragment" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/primary"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_detail"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentInsetStart="0dp">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/lbl_detail_back"
+                    android:onClick="@{fragment::onBackPressed}"
+                    android:paddingHorizontal="16dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/lbl_repo_detail"
+                    android:textColor="@color/accent" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <TextView
+            android:id="@+id/detail_tv_lbl_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="@string/title_repo_name"
+            android:textColor="@color/accent"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/detail_tv_lbl_desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appbar_detail" />
+
+        <TextView
+            android:id="@+id/detail_tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/nunito_regular"
+            android:maxLines="1"
+            android:text="@{viewModel.data.name}"
+            android:textColor="@color/accent_transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/detail_tv_lbl_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_tv_lbl_name"
+            app:layout_constraintTop_toTopOf="@+id/detail_tv_lbl_name"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/detail_tv_lbl_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="@string/title_repo_desc"
+            android:textColor="@color/accent"
+            android:textSize="16sp"
+            app:goneUnless="@{viewModel.data.description != null}"
+            app:layout_constraintBottom_toTopOf="@+id/detail_tv_lbl_owner"
+            app:layout_constraintStart_toStartOf="@+id/detail_tv_lbl_name"
+            app:layout_constraintTop_toBottomOf="@+id/detail_tv_lbl_name" />
+
+        <TextView
+            android:id="@+id/detail_tv_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/nunito_regular"
+            android:lineSpacingExtra="-1dp"
+            android:maxLines="2"
+            android:text="@{viewModel.data.description}"
+            android:textColor="@color/accent_transparent"
+            app:goneUnless="@{viewModel.data.description != null}"
+            app:layout_constraintBottom_toBottomOf="@+id/detail_tv_lbl_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_tv_lbl_desc"
+            app:layout_constraintStart_toStartOf="@+id/detail_tv_name"
+            app:layout_constraintTop_toTopOf="@+id/detail_tv_lbl_desc"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/detail_tv_lbl_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="@string/title_owner"
+            android:textColor="@color/accent"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/detail_tv_lbl_language"
+            app:layout_constraintStart_toStartOf="@+id/detail_tv_lbl_name"
+            app:layout_constraintTop_toBottomOf="@+id/detail_tv_lbl_desc" />
+
+        <TextView
+            android:id="@+id/detail_tv_owner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/nunito_regular"
+            android:maxLines="1"
+            android:text="@{viewModel.data.owner.login}"
+            android:textColor="@color/accent_transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/detail_tv_lbl_owner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_tv_lbl_owner"
+            app:layout_constraintStart_toStartOf="@+id/detail_tv_name"
+            app:layout_constraintTop_toTopOf="@+id/detail_tv_lbl_owner"
+            tools:text="@tools:sample/full_names" />
+
+
+        <TextView
+            android:id="@+id/detail_tv_lbl_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="@string/title_language"
+            android:textColor="@color/accent"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/detail_card_show_repo"
+            app:layout_constraintStart_toStartOf="@+id/detail_tv_lbl_name"
+            app:layout_constraintTop_toBottomOf="@+id/detail_tv_lbl_owner" />
+
+        <TextView
+            android:id="@+id/detail_tv_language"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/nunito_regular"
+            android:maxLines="1"
+            android:text="@{viewModel.data.language}"
+            android:textColor="@color/accent_transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/detail_tv_lbl_language"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_tv_lbl_language"
+            app:layout_constraintStart_toStartOf="@+id/detail_tv_name"
+            app:layout_constraintTop_toTopOf="@+id/detail_tv_lbl_language"
+            tools:text="@tools:sample/lorem" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/detail_card_show_repo"
+            android:layout_width="180dp"
+            android:layout_height="0dp"
+            android:onClick="@{fragment::showRepo}"
+            app:cardBackgroundColor="@color/detail_card_bg_color"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_detail"
+            app:layout_constraintDimensionRatio="H,35:10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_tv_lbl_language">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/lbl_show_repo"
+                android:textColor="@color/primaryDark" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.65"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/accent"
+            app:goneUnless="@{viewModel.loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:goneUnless="@{!viewModel.loading}"
+            app:constraint_referenced_ids="detail_tv_lbl_name,
+detail_tv_name,
+detail_tv_lbl_owner,
+detail_tv_owner,
+detail_tv_lbl_language,
+detail_tv_language,
+detail_card_show_repo,"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
