@@ -11,10 +11,10 @@
         <action
             android:id="@+id/action_repoListFragment_to_repoDetailFragment"
             app:destination="@id/repoDetailFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_in_right"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
             app:popUpTo="@+id/repoListFragment" />
     </fragment>
     <fragment
@@ -25,12 +25,12 @@
 
         <argument
             android:name="owner"
-            app:nullable="true"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
         <argument
             android:name="repo"
-            app:nullable="true"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
 
     </fragment>
 </navigation>
