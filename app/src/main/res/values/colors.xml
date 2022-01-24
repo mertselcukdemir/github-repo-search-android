@@ -5,8 +5,8 @@
     <color name="primaryDark">#f3f3f3f3</color>
     <color name="primaryLight">#ffffff</color>
     <color name="accent">#111111</color>
+    <color name="detail_card_bg_color">#000000</color>
     <color name="accent_transparent">#B3111111</color>
-    <color name="grey">#807878</color>
 
     <!--Text colors-->
     <color name="textHeadline">#1f1f1f</color>

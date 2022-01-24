@@ -19,6 +19,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/primary"
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -183,7 +184,7 @@
             android:layout_width="180dp"
             android:layout_height="0dp"
             android:onClick="@{fragment::showRepo}"
-            app:cardBackgroundColor="@color/accent"
+            app:cardBackgroundColor="@color/detail_card_bg_color"
             app:cardCornerRadius="30dp"
             app:cardElevation="6dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline_detail"
