@@ -2,12 +2,8 @@ package com.mertselcukdemir.repo.ui.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.MenuView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mertselcukdemir.core.data.RepositoryModel
-import com.mertselcukdemir.repo.ui.list.adapter.holders.ErrorViewHolder
-import com.mertselcukdemir.repo.ui.list.adapter.holders.LoadingViewHolder
 import com.mertselcukdemir.repo.ui.list.adapter.holders.RepoListViewHolder
 import com.mertselcukdemir.ui.base.BaseListAdapter
 import com.mertselcukdemir.ui.base.BasePagedListAdapter

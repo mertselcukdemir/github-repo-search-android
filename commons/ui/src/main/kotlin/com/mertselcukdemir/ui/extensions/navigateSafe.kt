@@ -1,7 +1,6 @@
 package com.mertselcukdemir.ui.extensions
 
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions

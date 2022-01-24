@@ -4,9 +4,9 @@ import com.mertselcukdemir.core.data.repositories.GithubRepoRepository
 import com.mertselcukdemir.core.di.scopes.FeatureScope
 import com.mertselcukdemir.repo.ui.detail.RepoDetailFragment
 import com.mertselcukdemir.repo.ui.detail.RepoDetailViewModel
+import com.mertselcukdemir.ui.extensions.viewModel
 import dagger.Module
 import dagger.Provides
-import com.mertselcukdemir.ui.extensions.viewModel
 
 /**
  * Created by mertselcukdemir on 24.01.2022

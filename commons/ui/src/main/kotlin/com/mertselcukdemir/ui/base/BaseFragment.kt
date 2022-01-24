@@ -13,8 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import com.mertselcukdemir.ui.extensions.dataBinding
-import com.mertselcukdemir.ui.extensions.observe
 import javax.inject.Inject
 
 /**

@@ -1,6 +1,5 @@
 package com.mertselcukdemir.repo.ui.list.paging
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.mertselcukdemir.core.data.RepositoryModel

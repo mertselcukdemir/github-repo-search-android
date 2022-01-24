@@ -5,8 +5,8 @@
 
 package commons
 
-import dependencies.Dependencies
 import dependencies.AnnotationProcessorsDependencies
+import dependencies.Dependencies
 
 plugins {
     id("com.android.library")

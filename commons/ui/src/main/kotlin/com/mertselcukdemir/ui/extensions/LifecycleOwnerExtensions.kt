@@ -3,7 +3,6 @@ package com.mertselcukdemir.ui.extensions
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 
 /**
  * Created by mertselcukdemir on 21.01.2022

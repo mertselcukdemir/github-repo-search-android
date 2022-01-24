@@ -5,8 +5,9 @@
 
 package commons
 
-import dependencies.Dependencies
+import BuildModules
 import dependencies.AnnotationProcessorsDependencies
+import dependencies.Dependencies
 
 plugins {
     id("com.android.dynamic-feature")

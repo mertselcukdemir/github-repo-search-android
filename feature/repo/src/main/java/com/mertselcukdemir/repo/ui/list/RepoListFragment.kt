@@ -14,7 +14,6 @@ import com.mertselcukdemir.repo.ui.list.adapter.RepoListAdapter
 import com.mertselcukdemir.repo.ui.list.di.DaggerRepoListComponent
 import com.mertselcukdemir.repo.ui.list.di.RepoListModule
 import com.mertselcukdemir.ui.base.BaseFragment
-import com.mertselcukdemir.ui.base.BaseViewModel
 import com.mertselcukdemir.ui.extensions.observe
 import com.mertselcukdemir.ui.utils.DebouncingQueryTextListener
 

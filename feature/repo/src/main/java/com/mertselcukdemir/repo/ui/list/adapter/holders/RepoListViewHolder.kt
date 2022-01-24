@@ -3,8 +3,8 @@ package com.mertselcukdemir.repo.ui.list.adapter.holders
 import android.view.LayoutInflater
 import com.mertselcukdemir.core.data.RepositoryModel
 import com.mertselcukdemir.repo.databinding.AdapterRepoBinding
-import com.mertselcukdemir.ui.base.BaseViewHolder
 import com.mertselcukdemir.repo.ui.list.RepoListFragment
+import com.mertselcukdemir.ui.base.BaseViewHolder
 
 /**
  * Created by mertselcukdemir on 21.01.2022
