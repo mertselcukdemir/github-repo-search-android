@@ -23,7 +23,11 @@ import androidx.fragment.app.Fragment
  * All rights reserved.
  */
 
-
+/**
+ * View listing the all Github Repositories with option to filter by keyword.
+ *
+ * @see BaseFragment
+ */
 class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel>(
     layoutId = R.layout.fragment_repo_list
 ) {
