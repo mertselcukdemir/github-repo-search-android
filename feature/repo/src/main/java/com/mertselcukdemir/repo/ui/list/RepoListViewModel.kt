@@ -30,7 +30,6 @@ class RepoListViewModel @Inject constructor(
         it.networkState
     }
     val data = LivePagedListBuilder(dataSourceFactory, PAGE_MAX_ELEMENTS).build()
-    val loading: MutableLiveData<Boolean> = MutableLiveData()
     val isEmptyResponse: MutableLiveData<Boolean> = MutableLiveData(false)
     val keyword: MutableLiveData<String> = MutableLiveData()
     val state = Transformations.map(networkState) {

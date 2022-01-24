@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/repo_list_fragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/repoListFragment">
     <fragment
-        android:id="@+id/repo_list_fragment"
+        android:id="@+id/repoListFragment"
         android:name="com.mertselcukdemir.repo.ui.list.RepoListFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_repo_list">
+        <action
+            android:id="@+id/action_repoListFragment_to_repoDetailFragment"
+            app:destination="@id/repoDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_in_right"
+            app:popUpTo="@+id/repoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/repoDetailFragment"
+        android:name="com.mertselcukdemir.repo.ui.detail.RepoDetailFragment"
+        android:label="RepoDetailFragment"
+        tools:layout="@layout/fragment_repo_detail">
+
+        <argument
+            android:name="owner"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="repo"
+            app:nullable="true"
+            app:argType="string" />
+
+    </fragment>
 </navigation>

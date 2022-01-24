@@ -11,7 +11,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.mertselcukdemir.ui.extensions.dataBinding
+import com.mertselcukdemir.ui.extensions.observe
 import javax.inject.Inject
 
 /**
@@ -43,6 +46,14 @@ abstract class BaseFragment<B : ViewDataBinding, M : ViewModel>(
      * Called to Initialize view data binding variables when fragment view is created.
      */
     abstract fun onInitDataBinding()
+
+    /**
+     * @param errorMessage is the text to show error.
+     */
+    @Suppress("MemberVisibilityCanBePrivate") // Could be used on other fragments
+    protected fun onErrorInitialized(errorMessage: String) {
+        Snackbar.make(viewBinding.root, errorMessage, BaseTransientBottomBar.LENGTH_SHORT).show()
+    }
 
     /**
      * Called to have the fragment instantiate its user interface view.

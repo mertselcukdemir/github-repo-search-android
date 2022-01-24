@@ -21,7 +21,7 @@ android {
     }
 
     buildTypes.forEach{
-        it.buildConfigField("String", "SERVER_URL", "\"https://api.github.com/search/\"")
+        it.buildConfigField("String", "SERVER_URL", "\"https://api.github.com/\"")
     }
 }
 

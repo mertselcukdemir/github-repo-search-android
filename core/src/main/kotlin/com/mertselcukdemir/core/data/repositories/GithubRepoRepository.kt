@@ -1,6 +1,7 @@
 package com.mertselcukdemir.core.data.repositories
 
 import com.mertselcukdemir.core.data.RepositoryListResponse
+import com.mertselcukdemir.core.data.RepositoryModel
 import com.mertselcukdemir.core.network.services.GithubRepoService
 import retrofit2.Response
 
@@ -26,7 +27,7 @@ class GithubRepoRepository(private val service: GithubRepoService) {
     /**
      * Get filtered repositories by given keyword.
      *
-     * * @param type  for the specific item you want to find. It is "repository" for this project.
+     * @param type for the specific item you want to find. It is "repository" for this project.
      */
     suspend fun getRepoList(type: String, queries: HashMap<String, String?>): Response<RepositoryListResponse> {
         return service.getRepositories(type, queries)
@@ -41,7 +42,21 @@ class GithubRepoRepository(private val service: GithubRepoService) {
         )
     }
 
+    /**
+     * @param keyword entered by the user in the text field
+     */
     fun initKeyword(keyword: String) {
         this.keyword = keyword
+    }
+
+    /**
+     * Get all info of selected repository.
+     *
+     * @param owner Repository owner.
+     * @param repo Name of the repository.
+     * @return Response for single repo resource.
+     */
+    suspend fun getRepoDetail(owner: String, repo: String): Response<RepositoryModel> {
+        return service.getRepoDetail(owner, repo)
     }
 }

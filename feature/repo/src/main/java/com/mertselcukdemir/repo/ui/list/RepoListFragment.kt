@@ -2,9 +2,10 @@ package com.mertselcukdemir.repo.ui.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.mertselcukdemir.core.data.RepositoryModel
 import com.mertselcukdemir.githubrepo.GithubRepoApplication.Companion.coreComponent
 import com.mertselcukdemir.repo.R
@@ -13,10 +14,9 @@ import com.mertselcukdemir.repo.ui.list.adapter.RepoListAdapter
 import com.mertselcukdemir.repo.ui.list.di.DaggerRepoListComponent
 import com.mertselcukdemir.repo.ui.list.di.RepoListModule
 import com.mertselcukdemir.ui.base.BaseFragment
+import com.mertselcukdemir.ui.base.BaseViewModel
 import com.mertselcukdemir.ui.extensions.observe
 import com.mertselcukdemir.ui.utils.DebouncingQueryTextListener
-
-import androidx.fragment.app.Fragment
 
 /**
  * Created by mertselcukdemir on 20.01.2022
@@ -47,8 +47,9 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.state, ::onViewStateChange)
         observe(viewModel.data, ::onViewDataChange)
-        observe(viewModel.errorMessage, ::onErrorInitialized)
         observe(viewModel.keyword, ::onKeywordChanged)
+        observe(viewModel.errorMessage, ::onErrorInitialized)
+
         if (savedInstanceState != null) {
             viewModel.restoreFromBundle(savedInstanceState)
         }
@@ -77,7 +78,7 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
             layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             //layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             viewAdapter = RepoListAdapter({ selectedRepo -> //selected item call back
-                openRepoDetail(selectedRepo.id)
+                openRepoDetail(selectedRepo)
             }, { //retry callback
                 viewModel.retryAddReposList()
             })
@@ -89,13 +90,15 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
     /**
      * Send interaction event for open repo detail view from selected repo.
      *
-     * @param selectedRepoId Repo identifier.
+     * @param selectedRepo Repository model that has been selected.
      */
-    private fun openRepoDetail(selectedRepoId: Long?) {
-        selectedRepoId?.let { id ->
-
-        }
-
+    private fun openRepoDetail(selectedRepo: RepositoryModel) {
+        findNavController().navigate(
+            RepoListFragmentDirections.actionRepoListFragmentToRepoDetailFragment(
+                selectedRepo.owner?.login,
+                selectedRepo.name
+            )
+        )
     }
 
     /**
@@ -150,13 +153,6 @@ class RepoListFragment : BaseFragment<FragmentRepoListBinding, RepoListViewModel
 
     private fun onKeywordChanged(keyword: String) {
         viewModel.search(keyword)
-    }
-
-    /**
-     * @param errorMessage is the text to show error.
-     */
-    private fun onErrorInitialized(errorMessage: String) {
-        Snackbar.make(viewBinding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
     }
 
     /**

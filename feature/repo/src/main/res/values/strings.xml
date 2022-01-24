@@ -6,4 +6,11 @@
     <string name="repo_list_add_error_text">Error on fetch more repo</string>
     <string name="repo_list_add_retry_button">Retry</string>
     <string name="lbl_empty_result">It looks quite empty here.Try to search with a new keyword</string>
+    <string name="lbl_detail_back">Detail Back Button</string>
+    <string name="lbl_repo_detail">Repository Detail</string>
+    <string name="title_repo_name">Name:</string>
+    <string name="title_repo_desc">Desc:</string>
+    <string name="title_owner">Owner:</string>
+    <string name="title_language">Language:</string>
+    <string name="lbl_show_repo">Show Repo</string>
 </resources>

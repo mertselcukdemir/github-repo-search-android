@@ -12,6 +12,7 @@ plugins {
     id("com.android.dynamic-feature")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 dependencies {

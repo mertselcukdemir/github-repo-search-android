@@ -1,5 +1,6 @@
 package com.mertselcukdemir.ui.base
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mertselcukdemir.core.data.ErrorData
 import com.mertselcukdemir.ui.livedata.SingleLiveData
@@ -11,6 +12,7 @@ import com.mertselcukdemir.ui.livedata.SingleLiveData
 
 open class BaseViewModel : ViewModel() {
     var errorMessage: SingleLiveData<String> = SingleLiveData()
+    val loading: MutableLiveData<Boolean> = MutableLiveData()
 
     protected fun handleError(errorData: ErrorData?) {
         //Exception thrown by Coroutines
