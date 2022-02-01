@@ -50,7 +50,7 @@ abstract class BaseFragment<B : ViewDataBinding, M : ViewModel>(
      */
     @Suppress("MemberVisibilityCanBePrivate") // Could be used on other fragments
     protected fun onErrorInitialized(errorMessage: String) {
-        Snackbar.make(viewBinding.root, errorMessage, BaseTransientBottomBar.LENGTH_SHORT).show()
+        Snackbar.make(viewBinding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
     }
 
     /**
@@ -112,7 +112,6 @@ abstract class BaseFragment<B : ViewDataBinding, M : ViewModel>(
      * @see requireActivity
      */
     fun requireCompatActivity(): AppCompatActivity {
-        requireActivity()
         val activity = requireActivity()
         if (activity is AppCompatActivity) {
             return activity

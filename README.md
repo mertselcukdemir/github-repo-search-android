@@ -29,8 +29,7 @@ The architecture of the application is based, apply and strictly complies with e
 Modules are collection of source files and build settings that allow you to divide a project into discrete units of functionality. In this case apart from dividing by functionality/responsibility, existing the following dependence between them:
 
 -   `:app` depends on `:core` and indirectly depends on `:feature` by dynamic-features.
--   `:feature` modules depends on `:commons`, `:core`, `:libraries` and `:app`.
--   `:core` and `:commons` only depends for possible utils on `:libraries`.
+-   `:feature` modules depends on `:commons`, `:core` and `:app`.
 
 ## Tech-stack
 
