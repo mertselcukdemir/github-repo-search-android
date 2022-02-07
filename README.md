@@ -1,5 +1,6 @@
-# Xapo Android Interview Test Project
+# Github Repo Search Android App
 
+Modular android app for searching trending Github repositories and the details of each repository.
 
 ## Design
 

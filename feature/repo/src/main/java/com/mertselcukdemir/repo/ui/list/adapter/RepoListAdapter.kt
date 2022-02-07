@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mertselcukdemir.core.data.RepositoryModel
 import com.mertselcukdemir.repo.ui.list.adapter.holders.RepoListViewHolder
-import com.mertselcukdemir.ui.base.BaseListAdapter
 import com.mertselcukdemir.ui.base.BasePagedListAdapter
 
 /**
@@ -17,7 +16,7 @@ import com.mertselcukdemir.ui.base.BasePagedListAdapter
  * Class for presenting repos List data in a [RecyclerView], including computing
  * diffs between Lists on a background thread.
  *
- * @see BaseListAdapter
+ * @see BasePagedListAdapter
  */
 class RepoListAdapter(
     private val repoCallBack: (model: RepositoryModel) -> Unit,
@@ -26,8 +25,6 @@ class RepoListAdapter(
     itemsSame = { old, new -> old.id == new.id },
     contentsSame = { old, new -> old == new }
 ) {
-
-    private var state: RepoListAdapterState = RepoListAdapterState.Added
 
     /**
      * Called when RecyclerView needs a new [RecyclerView.ViewHolder] of the given type to
@@ -38,7 +35,6 @@ class RepoListAdapter(
      * @param inflater Instantiates a layout XML file into its corresponding View objects.
      * @param viewType The view type of the new View.
      * @return A new ViewHolder that holds a View of the given view type.
-     * @see BaseListAdapter.onCreateViewHolder
      */
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -54,7 +50,6 @@ class RepoListAdapter(
      * @param holder The ViewHolder which should be updated to represent the contents of the
      *        item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
-     * @see BaseListAdapter.onBindViewHolder
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         getItem(position)?.let {
